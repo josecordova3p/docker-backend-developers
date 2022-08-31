@@ -1,0 +1,23 @@
+{
+  "name": "lab",
+  "version": "1.0.0",
+  "description": "Docker lab",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev:watch": "nodemon -L src/index.js",
+    "transpile": "babel ./src --out-dir dist"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.18.10",
+    "@babel/core": "^7.18.10",
+    "@babel/preset-env": "^7.18.10",
+    "nodemon": "1.19.1"
+  },
+  "dependencies": {
+    "amqplib": "^0.10.1",
+    "mongoose": "^6.5.1"
+  }
+}

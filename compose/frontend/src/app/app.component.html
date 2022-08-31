@@ -1,0 +1,30 @@
+<div class="container">
+  <p *ngIf="orderPlaced">
+    <ngb-alert [type]="'success'" (closed)="close()">The order for product {{orderForm.value.product}} was placed.</ngb-alert>
+  </p>
+  <form [formGroup]="orderForm" (ngSubmit)="onSubmit(orderForm)">
+    <div class="col-sm-6 offset-sm-3">
+      <h1>Order</h1>
+      <div class="row mb-3">
+        <label for="product" class="col-sm-2 col-form-label">Product</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="product" formControlName="product">
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label for="quantity" class="col-sm-2 col-form-label">Quantity</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="quantity" formControlName="quantity">
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label for="unitPrice" class="col-sm-2 col-form-label">Price</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="unitPrice" formControlName="unitPrice">
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="orderPlaced">Place order</button>
+      <button type="button" class="btn btn-danger" (click)="clearForm(orderForm)">Clear</button>
+    </div>
+  </form>
+</div>

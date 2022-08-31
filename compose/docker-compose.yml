@@ -1,0 +1,52 @@
+version: '3.4'
+services:
+  rabbitmq:
+    image: rabbitmq:3.9.22-management
+    hostname: lab-rabbit
+    environment:
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASS: password
+    ports:
+      - 15672:15672
+      - 5672:5672
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:15672"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+  backend:
+    build: ./backend
+    environment:
+      PORT: 3000
+      RABBITMQ_SERVER: rabbitmq
+    ports:
+      - 3000:3000
+    depends_on:
+      - rabbitmq
+  subscriber:
+    build: ./subscriber
+    environment:
+      RABBITMQ_SERVER: rabbitmq
+      MONGODB_SERVER: mongodb
+    restart: on-failure
+    depends_on:
+      - rabbitmq
+      - mongodb
+  mongodb:
+    image: mongo:5.0.9
+    ports:
+      - 27017:27017
+  frontend:
+    build: ./frontend
+    ports:
+      - 8080:80
+    depends_on:
+      - backend
+  mongo-express:
+    image: mongo-express:0.54.0
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongodb
+    ports:
+      - 8081:8081
+    depends_on:
+      - mongodb
