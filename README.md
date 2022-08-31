@@ -10,6 +10,12 @@ Images are fetched from [Docker Hub](https://hub.docker.com/) unless the URL is 
 ### Prerequisites
 You only need to have docker installed and a terminal.
 
+If you are using minikube, you can find the ip with the minikube command and use that ip in the examples.
+```
+$ minikube ip
+```
+If you are using docker natively, you can use localhost or 127.0.0.1 for the examples.
+
 ### MySQL
 ```
 $ docker pull mysql:8.0.11
