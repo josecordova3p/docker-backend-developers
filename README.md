@@ -187,11 +187,19 @@ $ docker build -t dev-php:1.0.0 .
 $ docker run -d --name lab-php -p 8080:80 dev-php:1.0.0
 ```
 http://192.168.64.3:8080/info.php
+
+Search for ``pdo`` and it should only show pdo_sqlite.
+
+Uncomment this line in the Dockerfile to install pdo_mysql extension and check phpinfo again.
+```
+#RUN docker-php-ext-install pdo_mysql
+```
 ```
 $ docker rm -f lab-php
 $ docker build -t dev-php:1.0.0 .
 $ docker run -d --name lab-php -p 8080:80 dev-php:1.0.0
 ```
+It will show pdo_mysql enabled.
 
 ### Docker Compose
 ```
